@@ -91,9 +91,9 @@ const App = () => {
           showMessage(`The number of user '${newName}' was updated`)
         })
         .catch(error => {
-          showMessage(`Information of ${newName} has already been removed from server`, true)
+          showMessage(error.response.data.error, true)
         })
-      } 
+    }
     else {
       personService
         .create(personObject)
@@ -102,7 +102,7 @@ const App = () => {
           showMessage(`Added ${newName}`)
         })
         .catch(error => {
-          showMessage(`Information of ${newName} has already been removed from server`, true)
+          showMessage(error.response.data.error, true)
           })
       }
       setNewName('')
