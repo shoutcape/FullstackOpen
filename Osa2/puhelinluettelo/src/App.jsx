@@ -86,11 +86,12 @@ const App = () => {
     if (personExists){
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`))
       personService
-        .update(personExists.id, personObject).then(returnedPerson => {
+        .update(personExists.id, personObject)
+        .then(returnedPerson => {
           setPersons(persons.map(person => person.id !== personExists.id ? person : returnedPerson))
           showMessage(`The number of user '${newName}' was updated`)
         })
-        .catch(error => {
+        .catch(() => {
           showMessage(`Information of ${newName} has already been removed from server`, true)
         })
       } 
@@ -101,7 +102,7 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           showMessage(`Added ${newName}`)
         })
-        .catch(error => {
+        .catch(() => {
           showMessage(`Information of ${newName} has already been removed from server`, true)
           })
       }
