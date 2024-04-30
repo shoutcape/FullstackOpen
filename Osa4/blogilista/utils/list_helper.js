@@ -41,7 +41,7 @@ const mostLikes = (blogs) => {
             result[blog.author] = blog.likes
         }
         return result
-    }, [])
+    }, {})
     const mostLikedAuthor = _.maxBy(Object.keys(authorsAndLikes), (author) => authorsAndLikes[author])
     const result = ({
         author: mostLikedAuthor,
