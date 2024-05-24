@@ -1,14 +1,6 @@
 {
     "editor.tokenColorCustomizations": {
-        "textMateRules": [
-            {
-                "name": "envKeys",
-                "scope": "string.quoted.single.ini,constant.numeric.ini,string.quoted.double.ini",
-                "settings": {
-                    "foreground": "#19354900"
-                }
-            }
-        ],
-        "comments": ""
+        "comments": "",
+        "textMateRules": [],
     }
 }
