@@ -1,19 +1,19 @@
-const Notification = ({ message, setMessage, errorState, setErrorState}) => {
-    if (message === null) {
-        return null
-    }
+const Notification = ({ message, setMessage, errorState, setErrorState }) => {
+  if (message === null) {
+    return null
+  }
 
-    setTimeout(() => {
-        setMessage(null)
-        setErrorState(false)
-    }, 5000)
+  setTimeout(() => {
+    setMessage(null)
+    setErrorState(false)
+  }, 5000)
 
-    if (message) {
+  if (message) {
     return (
-        <div className={errorState ? 'error' : 'success'}>
-            {message}
-        </div>
+      <div className={errorState ? 'error' : 'success'}>
+        {message}
+      </div>
     )
-}
+  }
 }
 export default Notification
