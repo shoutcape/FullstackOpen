@@ -4,7 +4,7 @@ import blogService from './services/blogs'
 import LoginForm from './components/loginForm'
 import NewBlogForm from './components/newBlogForm'
 import Notification from './components/notification'
-import Togglable from './components/Togglable'
+import Togglable from './components/togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -31,6 +31,12 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBloglistUser')
     setUser(null)
+  }
+
+  const addBlog = async (blogObject) => {
+    const returnedBlog = await blogService.create(blogObject)
+    setBlogs(blogs.concat(returnedBlog))
+    setMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
   }
 
   return (
@@ -66,14 +72,11 @@ const App = () => {
             {user.name} logged in
             <button onClick={handleLogout}>logout</button>
           </p>
+
           <Togglable buttonLabel={'create new blog'} ref={blogFormRef}>
-            <NewBlogForm
-              setMessage={setMessage}
-              blogs={blogs}
-              setBlogs={setBlogs}
-              blogFormRef={blogFormRef}
-            />
+            <NewBlogForm addBlog={addBlog} blogFormRef={blogFormRef} />
           </Togglable>
+
           {blogs
             .sort((blogA, blogB) => blogB.likes - blogA.likes)
             .map((blog) => (

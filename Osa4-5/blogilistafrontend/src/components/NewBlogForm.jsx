@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import blogService from '../services/blogs'
 
-const NewBlogForm = ({ setMessage, blogs, setBlogs, blogFormRef }) => {
+const NewBlogForm = ({ addBlog, blogFormRef }) => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
@@ -13,14 +12,14 @@ const NewBlogForm = ({ setMessage, blogs, setBlogs, blogFormRef }) => {
       author: author,
       url: url,
     }
-    const returnedBlog = await blogService.create(blogObject)
-    console.log(returnedBlog)
-    setBlogs(blogs.concat(returnedBlog))
+    addBlog(blogObject)
     setTitle('')
     setAuthor('')
     setUrl('')
-    setMessage(`a new blog ${blogObject.title} by ${blogObject.author} added`)
-    blogFormRef.current.toggleVisibility()
+
+    if (blogFormRef) {
+      blogFormRef.current.toggleVisibility()
+    }
   }
 
   return (
@@ -30,6 +29,7 @@ const NewBlogForm = ({ setMessage, blogs, setBlogs, blogFormRef }) => {
         <div>
           title:
           <input
+            placeholder='title'
             type='text'
             value={title}
             onChange={({ target }) => setTitle(target.value)}
@@ -38,6 +38,7 @@ const NewBlogForm = ({ setMessage, blogs, setBlogs, blogFormRef }) => {
         <div>
           author:
           <input
+            placeholder='author'
             type='text'
             value={author}
             onChange={({ target }) => setAuthor(target.value)}
@@ -46,6 +47,7 @@ const NewBlogForm = ({ setMessage, blogs, setBlogs, blogFormRef }) => {
         <div>
           url:
           <input
+            placeholder='url'
             type='text'
             value={url}
             onChange={({ target }) => setUrl(target.value)}
