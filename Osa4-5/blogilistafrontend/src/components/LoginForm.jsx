@@ -32,10 +32,12 @@ const LoginForm = ({ setUser, setMessage, setErrorState }) => {
 
   return (
     <div>
-      <form onSubmit={handleLogin}>
+      <form
+        onSubmit={handleLogin}>
         <div>
                     Username
           <input
+            data-testid='username'
             type="text"
             name="username"
             value={username}
@@ -45,6 +47,7 @@ const LoginForm = ({ setUser, setMessage, setErrorState }) => {
         <div>
                     Password
           <input
+            data-testid='password'
             type="password"
             name="password"
             value={password}

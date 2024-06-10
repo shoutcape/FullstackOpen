@@ -24,9 +24,9 @@ const App = () => {
 
   useEffect(() => {
     blogService.getAll().then((blogs) => {
-      setBlogs(blogs)
+      setBlogs(blogs.sort((blogA, blogB) => blogB.likes - blogA.likes))
     })
-  }, [])
+  }, [blogs])
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBloglistUser')
@@ -77,17 +77,15 @@ const App = () => {
             <NewBlogForm addBlog={addBlog} blogFormRef={blogFormRef} />
           </Togglable>
 
-          {blogs
-            .sort((blogA, blogB) => blogB.likes - blogA.likes)
-            .map((blog) => (
-              <Blog
-                key={blog.id}
-                blog={blog}
-                user={user}
-                blogs={blogs}
-                setBlogs={setBlogs}
-              />
-            ))}
+          {blogs.map((blog) => (
+            <Blog
+              key={blog.id}
+              blog={blog}
+              user={user}
+              blogs={blogs}
+              setBlogs={setBlogs}
+            />
+          ))}
         </div>
       )}
     </div>

@@ -9,9 +9,9 @@ test('form calls the right information wiht the callback function', async () => 
 
   render(<NewBlogForm addBlog={addBlog} />)
 
-  const titleInput = screen.getByPlaceholderText('title')
-  const authorInput = screen.getByPlaceholderText('author')
-  const urlInput = screen.getByPlaceholderText('url')
+  const titleInput = screen.getByTestId('title')
+  const authorInput = screen.getByTestId('author')
+  const urlInput = screen.getByTestId('url')
   const createButton = screen.getByText('create')
 
   await testUser.type(titleInput, 'testTitle')

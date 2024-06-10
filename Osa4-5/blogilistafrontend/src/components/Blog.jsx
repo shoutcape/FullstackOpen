@@ -4,7 +4,6 @@ import { useState } from 'react'
 const Blog = ({ blog, user, blogs, setBlogs, mockHandler=null }) => {
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState('')
-  console.log(blog)
 
   const handleLikes = async (event) => {
     event.preventDefault()
@@ -40,7 +39,7 @@ const Blog = ({ blog, user, blogs, setBlogs, mockHandler=null }) => {
       {visible && (
         <div>
           <div>{blog.url}</div>
-          <div>
+          <div data-testid='likes'>
             {likes ? likes : blog.likes}
             <button onClick={mockHandler||handleLikes}>like</button>
           </div>
