@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { likeAnecdote } from '../reducers/anecdoteReducer'
+import { showNotification } from '../reducers/notificationReducer'
 
 const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch()
   const vote = (id) => {
     console.log('vote', id)
     dispatch(likeAnecdote(id))
+    dispatch(showNotification(anecdote))
   }
   return (
     <div key={anecdote.id}>
