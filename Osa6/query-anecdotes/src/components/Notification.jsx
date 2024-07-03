@@ -1,4 +1,4 @@
-import {useNotificationDispatch, useNotificationValue} from '../NotificationContext'
+import {useNotificationValue} from '../NotificationContext'
 
 const Notification = () => {
   const style = {
