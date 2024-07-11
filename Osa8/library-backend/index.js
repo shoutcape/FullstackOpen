@@ -128,7 +128,17 @@ const resolvers = {
   },
 
   Mutation: {
-    addBook: async (_root, args) => {
+    addBook: async (_root, args, context) => {
+      const currentUser = context.currentUser
+      if (!currentUser) {
+        throw new GraphQLError('Not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT'
+          }
+        }) 
+      }
+
+
       const author = await Author.findOne({ name: args.author })
       let book = new Book({ ...args, author: author })
       if (!author) {
@@ -172,7 +182,16 @@ const resolvers = {
       return book
     },
 
-    editAuthor: async (_root, args) => {
+    editAuthor: async (_root, args, context) => {
+      const currentUser = context.currentUser
+      if (!currentUser) {
+        throw new GraphQLError('Not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT'
+          }
+        }) 
+      }
+
       const target = await Author.findOne({ name: args.name })
 
       if (!target) {
