@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { ALL_AUTHORS, UPDATE_AUTHOR } from '../queries'
 
 const AuthorForm = ({ authors }) => {
-  const [name, setName] = useState(authors[0].name)
+  const [name, setName] = useState(authors[0]?.name)
   const [born, setBorn] = useState('')
   const [editAuthor] = useMutation(UPDATE_AUTHOR)
 
@@ -18,6 +18,7 @@ const AuthorForm = ({ authors }) => {
     setName('')
     setBorn('')
   }
+
 
   return (
     <div>
