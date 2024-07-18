@@ -66,9 +66,7 @@ const resolvers = {
 
       const author = await Author.findOne({ name: args.author })
       if (!author) {
-        console.log('ei löydetty authoria... tehdään uusi')
         const newAuthor = new Author({ name: args.author, born: null })
-        console.log('uusiauthori:',newAuthor)
         try {
           const book = new Book({ ...args, author: newAuthor._id })
           newAuthor.books = newAuthor.books.concat(book._id)

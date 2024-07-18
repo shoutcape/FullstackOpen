@@ -10,7 +10,6 @@ import { ALL_BOOKS, BOOK_ADDED } from './queries'
 
 export const updateCache = (cache, query, addedBook) => {
   const uniqByName = (a) => {
-    console.log('a:', a)
     let seen = new Set()
     return a.filter((item) => {
       let k = item.title
