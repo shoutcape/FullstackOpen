@@ -5,7 +5,24 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Login from './components/Login'
 import Recommend from './components/Recommend'
-import { useApolloClient } from '@apollo/client'
+import { useApolloClient, useSubscription } from '@apollo/client'
+import { ALL_BOOKS, BOOK_ADDED } from './queries'
+
+export const updateCache = (cache, query, addedBook) => {
+  const uniqByName = (a) => {
+    console.log('a:', a)
+    let seen = new Set()
+    return a.filter((item) => {
+      let k = item.title
+      return seen.has(k) ? false : seen.add(k)
+    })
+  }
+  cache.updateQuery(query, ({ allBooks }) => {
+    return {
+      allBooks: uniqByName(allBooks.concat(addedBook)),
+    }
+  })
+}
 
 const App = () => {
   const [page, setPage] = useState('authors')
@@ -19,6 +36,18 @@ const App = () => {
       setToken(fetchedToken)
     }
   }, [])
+
+  useSubscription(BOOK_ADDED, {
+    onData: ({ data }) => {
+      const addedBook = data.data.bookAdded
+      window.alert(`Book '${addedBook.title}' has been added`)
+      updateCache(
+        client.cache,
+        { query: ALL_BOOKS, variables: { genre: null, author: null } },
+        addedBook,
+      )
+    },
+  })
 
   const logout = async (event) => {
     event.preventDefault()
@@ -46,13 +75,17 @@ const App = () => {
 
       <Authors show={page === 'authors'} />
 
-      <Books show={page === 'books'} refetch={refetch} setRefetch={setRefetch} />
+      <Books
+        show={page === 'books'}
+        refetch={refetch}
+        setRefetch={setRefetch}
+      />
 
       <NewBook show={page === 'add'} setRefetch={setRefetch} />
 
       <Login show={page === 'login'} setToken={setToken} />
 
-      <Recommend show={page ==='recommend'} />
+      <Recommend show={page === 'recommend'} />
     </div>
   )
 }
