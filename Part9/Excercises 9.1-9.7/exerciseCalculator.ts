@@ -33,16 +33,18 @@ const parseExerciseArguments = (args: string[]): trainingArgs => {
       target: Number(target),
       trainingTime: trainingTime,
     };
+  } else {
+    throw new Error('All given arguments were not numbers');
   }
 };
 
-const calculateExercises = (): trainingData => {
+const calculateExercises = (): trainingData|void => {
   try {
     const { target, trainingTime } = parseExerciseArguments(process.argv);
 
     const periodLength = trainingTime.length;
-    const trainingDays = trainingTime.filter((day) => day > 0).length;
-    const totalTrainingTime = trainingTime.reduce((total, i) => total + i, 0);
+    const trainingDays = trainingTime.filter((day: number) => day > 0).length;
+    const totalTrainingTime = trainingTime.reduce((total: number, i: number) => total + i, 0);
 
     const average = totalTrainingTime / periodLength;
     const success = average >= target;

@@ -17,9 +17,8 @@ const parseArguments = (args: string[]): calculateValues => {
   }
 };
 
-const calculateBmi = (): string => {
+export const calculateBmi = (height: number, weight: number): string | void => {
   try {
-    const { height, weight } = parseArguments(process.argv);
 
     const heightInMSqr = ((height / 100) * height) / 100;
     const bmi = weight / heightInMSqr;
@@ -39,10 +38,12 @@ const calculateBmi = (): string => {
   } catch (error) {
     if (error instanceof Error) {
       console.log(`Error: ${error.message}`);
-      return
+      return;
     }
   }
 };
 
-
-console.log(calculateBmi());
+if (process.argv[2] && process.argv[3]) {
+  const { height, weight } = parseArguments(process.argv);
+  console.log(calculateBmi(height, weight));
+}
