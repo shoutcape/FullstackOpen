@@ -8,7 +8,7 @@ interface trainingData {
   average: number;
 }
 
-interface trainingArgs {
+export interface trainingArgs {
   trainingTime: number[];
   target: number;
 }
@@ -38,13 +38,14 @@ const parseExerciseArguments = (args: string[]): trainingArgs => {
   }
 };
 
-const calculateExercises = (): trainingData|void => {
+export const calculateExercises = (target: number, trainingTime: number[]): trainingData | void => {
   try {
-    const { target, trainingTime } = parseExerciseArguments(process.argv);
-
     const periodLength = trainingTime.length;
     const trainingDays = trainingTime.filter((day: number) => day > 0).length;
-    const totalTrainingTime = trainingTime.reduce((total: number, i: number) => total + i, 0);
+    const totalTrainingTime = trainingTime.reduce(
+      (total: number, i: number) => total + i,
+      0,
+    );
 
     const average = totalTrainingTime / periodLength;
     const success = average >= target;
@@ -53,13 +54,13 @@ const calculateExercises = (): trainingData|void => {
 
     switch (rating) {
       case 1:
-        ratingDescription = 'you need to train more';
+        ratingDescription = 'bad';
         break;
       case 2:
-        ratingDescription = 'not too bad but could be better';
+        ratingDescription = 'good';
         break;
       case 3:
-        ratingDescription = 'Well done you have reached your target';
+        ratingDescription = 'excellent';
         break;
       default:
         throw new Error('Something went wrong with the rating');
@@ -81,4 +82,7 @@ const calculateExercises = (): trainingData|void => {
   }
 };
 
-console.log(calculateExercises());
+if (process.argv[2] && process.argv[3]) {
+  const { target, trainingTime } = parseExerciseArguments(process.argv);
+  console.log(calculateExercises(target, trainingTime));
+}
