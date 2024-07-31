@@ -41,11 +41,11 @@ const isGender = (param: string): param is Gender => {
 };
 
 //Parsers
-const parseString = (name: unknown): string => {
-  if (!isString(name)) {
-    throw new Error('Incorrect or missing name');
+const parseString = (string: unknown): string => {
+  if (!isString(string)) {
+    throw new Error('Incorrect or missing String');
   }
-  return name;
+  return string;
 };
 
 const parseDate = (date: unknown): string => {
