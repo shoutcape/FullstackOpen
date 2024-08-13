@@ -12,8 +12,11 @@ app.get('/api/ping', (_req, res) => {
   return res.send('pong');
 });
 
+//endpoints
 app.use('/api/diagnoses', diagnosisRouter);
 app.use('/api/patients', patientRouter);
+app.use('/api/patients/:id', patientRouter);
+app.use('/api/patients/:id/entries', patientRouter);
 
 const PORT = 3001;
 
