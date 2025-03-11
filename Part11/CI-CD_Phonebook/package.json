@@ -1,0 +1,39 @@
+{
+  "name": "puhelinluettelo",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "server": "node app.js",
+    "lint": "eslint .",
+    "test": "npx playwright test" 
+  },
+  "dependencies": {
+    "@playwright/test": "^1.47.2",
+    "axios": "^1.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "json-server": "^0.17.4",
+    "mongoose": "^8.1.1",
+    "morgan": "^1.10.0",
+    "playwright": "^1.47.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.5.8",
+    "@stylistic/eslint-plugin-js": "^1.6.1",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "nodemon": "^3.0.3",
+    "vite": "^5.0.8"
+  }
+}

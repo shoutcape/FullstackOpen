@@ -1,0 +1,38 @@
+name: health-check
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  scheduled-health-check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: every day
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://ci-cd-phonebook.fly.dev/
+          max-attempts: 3
+          retry-delay: 5s
+
+
+      - name: Success
+        if: ${{ success() }}
+        uses: stegzilla/discord-notify@v4
+        with:
+          title: Phonebook health check successful
+          avatar_url: https://avatars.githubusercontent.com/u/74509593?s=400&u=5669e74c289240db364d1f89c95a9ffc1a5db0e5&v=4
+          colour: '#008000'
+          message: to https://ci-cd-phonebook.fly.dev/ by shoutcape
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+
+
+      - name: Failure
+        if: ${{ failure() }}
+        uses: stegzilla/discord-notify@v4
+        with:
+          title: Phonebook health check failed
+          avatar_url: https://avatars.githubusercontent.com/u/74509593?s=400&u=5669e74c289240db364d1f89c95a9ffc1a5db0e5&v=4
+          colour: '#FF0000'
+          message: "${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }}"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}

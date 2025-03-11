@@ -1,0 +1,38 @@
+name: health-check
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  scheduled-health-check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: every day
+        uses: jtalk/url-health-check-action@v4
+        with:
+          url: https://full-stack-open-pokedex-shoutcape.fly.dev/
+          max-attempts: 3 # Optional, defaults to 1
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+
+
+      - name: Success
+        if: success()
+        uses: stegzilla/discord-notify@v4
+        with:
+          title: Pokedex health check successful
+          avatar_url: https://avatars.githubusercontent.com/u/74509593?s=400&u=5669e74c289240db364d1f89c95a9ffc1a5db0e5&v=4
+          colour: '#008000'
+          message: to https://full-stack-open-pokedex-shoutcape.fly.dev/ by shoutcape
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+
+
+      - name: Failure
+        if: ${{ failure() && github.event_name == 'push'}}
+        uses: stegzilla/discord-notify@v4
+        with:
+          title: Pokedex health check failed
+          avatar_url: https://avatars.githubusercontent.com/u/74509593?s=400&u=5669e74c289240db364d1f89c95a9ffc1a5db0e5&v=4
+          colour: '#FF0000'
+          message: "${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }}"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
