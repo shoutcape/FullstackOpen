@@ -1,0 +1,32 @@
+const { Model, DataTypes } = require('sequelize')
+const { sequelize } = require('../utils/db')
+
+class Session extends Model { }
+
+Session.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  userId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    references: {model: 'users', key: 'id'}
+  },
+  token: {
+    type: DataTypes.STRING,
+    allowNull:false,
+    unique: true,
+  }
+}, {
+  sequelize,
+  underscored: true,
+  timestamps: true,
+  createdAt: 'created_at',
+  updatedAt: 'updated_at',
+  modelName: 'session'
+})
+
+module.exports = Session

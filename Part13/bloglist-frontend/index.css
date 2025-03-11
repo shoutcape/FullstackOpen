@@ -1,0 +1,29 @@
+.error,
+.success {
+  background: lightgray;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+}
+
+.success {
+  color: rgb(29, 114, 21);
+}
+
+.error {
+  color: red;
+}
+
+.blog {
+  border: 2px solid black;
+  margin: 5px;
+  padding: 3px;
+}
+
+.removeButton {
+  background-color: rgb(66, 140, 255);
+  border: none;
+}
