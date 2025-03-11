@@ -1,0 +1,30 @@
+Script started on 2024-09-23 11:29:50+03:00 [TERM="xterm-256color" TTY="/dev/pts/2" COLUMNS="126" LINES="20"]
+[?2004h]0;shoutcape@ShoutcapePC: ~/Documents/Github/part12-containers-applications[01;32mshoutcape@ShoutcapePC[00m:[01;34m~/Documents/Github/part12-containers-applications[00m$ docker run -it ubuntu bash
+[?2004lUnable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+
+[1A[2Kdafa2b0c44d2: Pulling fs layer [1B[1A[2Kdafa2b0c44d2: Downloading [>                                                  ]  310.5kB/29.75MB[1B[1A[2Kdafa2b0c44d2: Downloading [=========>                                         ]  5.552MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Downloading [====================>                              ]     12MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Downloading [============================>                      ]  17.21MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Downloading [=======================================>           ]   23.7MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Verifying Checksum [1B[1A[2Kdafa2b0c44d2: Download complete [1B[1A[2Kdafa2b0c44d2: Extracting [>                                                  ]  327.7kB/29.75MB[1B[1A[2Kdafa2b0c44d2: Extracting [=============>                                     ]  8.192MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Extracting [============================>                      ]  16.71MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Extracting [==========================================>        ]  25.56MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Extracting [=================================================> ]  29.49MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Extracting [==================================================>]  29.75MB/29.75MB[1B[1A[2Kdafa2b0c44d2: Pull complete [1BDigest: sha256:dfc10878be8d8fc9c61cbff33166cb1d1fe44391539243703c72766894fa834a
+Status: Downloaded newer image for ubuntu:latest
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# ls
+[?2004l[0m[01;36mbin[0m  [01;34mboot[0m  [01;34mdev[0m  [01;34metc[0m  [01;34mhome[0m  [01;36mlib[0m  [01;36mlib64[0m  [01;34mmedia[0m  [01;34mmnt[0m  [01;34mopt[0m  [01;34mproc[0m  [01;34mroot[0m  [01;34mrun[0m  [01;36msbin[0m  [01;34msrv[0m  [01;34msys[0m  [30;42mtmp[0m  [01;34musr[0m  [01;34mvar[0m
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# create      C cd usr      cat usr
+[?2004lcat: usr: Is a directory
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# ls usr
+[?2004l[0m[01;34mbin[0m  [01;34mgames[0m  [01;34minclude[0m  [01;34mlib[0m  [01;34mlib64[0m  [01;34mlibexec[0m  [01;34mlocal[0m  [01;34msbin[0m  [01;34mshare[0m  [01;34msrc[0m
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# ls usr/src
+[?2004l[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# mkdir usr/src  /app/index.js
+[?2004lmkdir: cannot create directory 'usr/src/app/index.js': No such file or directory
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# [Ktouch usr/sc rc/app/index.js
+[?2004ltouch: cannot touch 'usr/src/app/index.js': No such file or directory
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# [Ktouch usr/src/app/index.jsmkdir usr/src/app/index.js         
+[?2004l[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# [Kmkdir usr/src/apptouch usr/src/app/index.jsmkdir usr/src/app/index.jstouch usr/src/app/index.js
+[?2004l[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# [Ktouch usr/src/app/index.js[9Pmkdir usr/src/apptouch usr/src/app/index.jsmkdir usr/src/app/index.js[16Pls usr/src
+[?2004l[0m[01;34mapp[0m
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# ls usr/src/app
+[?2004lindex.js
+[?2004h]0;root@43e96fab3f16: /root@43e96fab3f16:/# exit
+[?2004lexit
+[?2004h]0;shoutcape@ShoutcapePC: ~/Documents/Github/part12-containers-applications[01;32mshoutcape@ShoutcapePC[00m:[01;34m~/Documents/Github/part12-containers-applications[00m$ exit
+[?2004lexit
+
+Script done on 2024-09-23 11:35:02+03:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,51 @@
+services:
+  app-prod:
+    image: todo-frontend-prod
+    build: 
+      context: ./todo-frontend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./todo-frontend/:/usr/src/app
+    environment:
+      - VITE_BACKEND_URL=${VITE_BACKEND_URL}
+    container_name: todo-frontend-prod
+
+  todo-backend-prod:
+    image: todo-backend-prod
+    build: 
+      context: ./todo-backend/
+      dockerfile: Dockerfile
+    volumes:
+      - ./todo-backend/:/usr/src/app
+    environment:
+      - REDIS_URL=${REDIS_URL}
+      - MONGO_URL=${MONGO_URL}
+    container_name: todo-backend-prod
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE}
+    volumes:
+      - ./todo-backend/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    container_name: mongo-prod
+
+  redis:
+    image: redis
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes:
+      - ./todo-backend/redis_data:/data
+    container_name: redis-prod
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy-prod
+    depends_on:
+      - app-prod # wait for the frontend container to be started
+
